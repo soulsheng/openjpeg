@@ -32,3 +32,6 @@
 /vc10/src/bin/Release
 /vc10/src/bin/jp2/*.bmp
 /vc10/src/bin/jp2/*.j2k
+/vc10/x64
+/vc10/src/lib/openjp2/x64
+/vc10/src/bin/jp2/x64
