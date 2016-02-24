@@ -1547,6 +1547,7 @@ int main(int argc, char **argv)
 	if (numDecompressedImages) {
 		fprintf(stdout, "decode time: %d ms\n", (int)( (tCumulative * 1000.0) / (OPJ_FLOAT64)numDecompressedImages));
 	}
+	system("pause");
 	return failed ? EXIT_FAILURE : EXIT_SUCCESS;
 }
 /*end main*/

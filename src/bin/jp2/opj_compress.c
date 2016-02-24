@@ -1874,6 +1874,6 @@ int main(int argc, char **argv) {
     if (num_compressed_files) {
 		    fprintf(stdout, "encode time: %d ms \n", (int)((t * 1000.0)/(OPJ_FLOAT64)num_compressed_files));
     }
-
+	system("pause");
     return 0;
 }

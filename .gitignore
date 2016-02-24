@@ -35,3 +35,4 @@
 /vc10/x64
 /vc10/src/lib/openjp2/x64
 /vc10/src/bin/jp2/x64
+/vc10/*.suo
