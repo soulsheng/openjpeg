@@ -40,6 +40,15 @@
 
 #include "opj_includes.h"
 
+#define TIME_STEP	1
+#if TIME_STEP
+#define TIME_TEST(title)	tNow = opj_clock() ; \
+							fprintf(stdout, "%s ", title) ; \
+							fprintf(stdout, "time: %d ms \n", (int)( (tNow - t) * 1000.0) ); \
+							t = tNow;
+#else
+#define TIME_TEST(title)
+#endif
 /* ----------------------------------------------------------------------- */
 
 /* TODO MSD: */
@@ -1172,6 +1181,7 @@ OPJ_BOOL opj_tcd_encode_tile(   opj_tcd_t *p_tcd,
                                                         OPJ_UINT32 p_max_length,
                                                         opj_codestream_info_t *p_cstr_info)
 {
+	OPJ_FLOAT64 t = opj_clock(), tNow;
 
         if (p_tcd->cur_tp_num == 0) {
 
@@ -1209,30 +1219,35 @@ OPJ_BOOL opj_tcd_encode_tile(   opj_tcd_t *p_tcd,
                         return OPJ_FALSE;
                 }
                 /* FIXME _ProfStop(PGROUP_DC_SHIFT); */
+				TIME_TEST( "shift" );
 
                 /* FIXME _ProfStart(PGROUP_MCT); */
                 if (! opj_tcd_mct_encode(p_tcd)) {
                         return OPJ_FALSE;
                 }
                 /* FIXME _ProfStop(PGROUP_MCT); */
+				TIME_TEST( "mct" );
 
                 /* FIXME _ProfStart(PGROUP_DWT); */
                 if (! opj_tcd_dwt_encode(p_tcd)) {
                         return OPJ_FALSE;
                 }
                 /* FIXME  _ProfStop(PGROUP_DWT); */
+				TIME_TEST( "dwt" );
 
                 /* FIXME  _ProfStart(PGROUP_T1); */
                 if (! opj_tcd_t1_encode(p_tcd)) {
                         return OPJ_FALSE;
                 }
                 /* FIXME _ProfStop(PGROUP_T1); */
+				TIME_TEST( "t1" );
 
                 /* FIXME _ProfStart(PGROUP_RATE); */
                 if (! opj_tcd_rate_allocate_encode(p_tcd,p_dest,p_max_length,p_cstr_info)) {
                         return OPJ_FALSE;
                 }
                 /* FIXME _ProfStop(PGROUP_RATE); */
+				TIME_TEST( "rate" );
 
         }
         /*--------------TIER2------------------*/
@@ -1247,6 +1262,7 @@ OPJ_BOOL opj_tcd_encode_tile(   opj_tcd_t *p_tcd,
                 return OPJ_FALSE;
         }
         /* FIXME _ProfStop(PGROUP_T2); */
+		TIME_TEST( "t2" );
 
         /*---------------CLEAN-------------------*/
 
@@ -1261,6 +1277,8 @@ OPJ_BOOL opj_tcd_decode_tile(   opj_tcd_t *p_tcd,
                                 opj_event_mgr_t *p_manager
                                 )
 {
+		OPJ_FLOAT64 t = opj_clock(), tNow;
+
         OPJ_UINT32 l_data_read;
         p_tcd->tcd_tileno = p_tile_no;
         p_tcd->tcp = &(p_tcd->cp->tcps[p_tile_no]);
@@ -1296,6 +1314,7 @@ OPJ_BOOL opj_tcd_decode_tile(   opj_tcd_t *p_tcd,
                 return OPJ_FALSE;
         }
         /* FIXME _ProfStop(PGROUP_T2); */
+		TIME_TEST( "t2" );
 
         /*------------------TIER1-----------------*/
 
@@ -1306,6 +1325,7 @@ OPJ_BOOL opj_tcd_decode_tile(   opj_tcd_t *p_tcd,
                 return OPJ_FALSE;
         }
         /* FIXME _ProfStop(PGROUP_T1); */
+		TIME_TEST( "t1" );
 
         /*----------------DWT---------------------*/
 
@@ -1316,6 +1336,7 @@ OPJ_BOOL opj_tcd_decode_tile(   opj_tcd_t *p_tcd,
                 return OPJ_FALSE;
         }
         /* FIXME _ProfStop(PGROUP_DWT); */
+		TIME_TEST( "dwt" );
 
         /*----------------MCT-------------------*/
         /* FIXME _ProfStart(PGROUP_MCT); */
@@ -1325,6 +1346,7 @@ OPJ_BOOL opj_tcd_decode_tile(   opj_tcd_t *p_tcd,
                 return OPJ_FALSE;
         }
         /* FIXME _ProfStop(PGROUP_MCT); */
+		TIME_TEST( "mct" );
 
         /* FIXME _ProfStart(PGROUP_DC_SHIFT); */
         if
@@ -1333,6 +1355,7 @@ OPJ_BOOL opj_tcd_decode_tile(   opj_tcd_t *p_tcd,
                 return OPJ_FALSE;
         }
         /* FIXME _ProfStop(PGROUP_DC_SHIFT); */
+		TIME_TEST( "shift" );
 
 
         /*---------------TILE-------------------*/
