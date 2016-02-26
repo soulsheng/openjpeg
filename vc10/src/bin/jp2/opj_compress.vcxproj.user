@@ -9,11 +9,11 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>-i Lighthouse8k0.bmp -o Lighthouse8k0.j2k</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-i Garden2k.bmp -o Garden2k.j2k -r 80</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>-i Lighthouse8k0.bmp -o Lighthouse8k0.j2k -r 80</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-i Garden2k.bmp -o Garden2k.j2k -r 80</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
