@@ -1306,7 +1306,7 @@ OPJ_BOOL opj_tcd_decode_tile(   opj_tcd_t *p_tcd,
         /* << INDEX */
 #endif
 
-        /*--------------TIER2------------------*/ 
+        /*--------------TIER2------------------*/  
         /* FIXME _ProfStart(PGROUP_T2); */
         l_data_read = 0;
         if (! opj_tcd_t2_decode(p_tcd, p_src, &l_data_read, p_max_length, p_cstr_index, p_manager))
